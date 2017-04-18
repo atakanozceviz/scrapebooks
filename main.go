@@ -32,10 +32,7 @@ func json(w http.ResponseWriter, r *http.Request) {
 	if k != "" {
 		var books model.Books
 		books = *controller.Search(&books, k)
-		avg, err := books.GetAvg()
-		if err != nil {
-			log.Println(err)
-		}
+		avg := books.GetAvg()
 		res := model.Result{
 			Books: books,
 			Avg:   avg,
