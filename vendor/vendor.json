@@ -1,0 +1,73 @@
+{
+	"comment": "",
+	"heroku": {
+		"goVersion": "go1.8",
+		"install": [
+			"./..."
+		]
+	},
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "bOODD4Gbw3GfcuQPU2dI40crxxk=",
+			"path": "github.com/PuerkitoBio/goquery",
+			"revision": "ed7d758e9a34ba1f55e8084e0d731448b46921a8",
+			"revisionTime": "2017-03-24T13:54:48Z"
+		},
+		{
+			"checksumSHA1": "2rWSos1D+xqNSGkvEMOG3pntod8=",
+			"path": "github.com/andybalholm/cascadia",
+			"revision": "349dd0209470eabd9514242c688c403c0926d266",
+			"revisionTime": "2016-12-24T14:14:13Z"
+		},
+		{
+			"checksumSHA1": "W4V9vfVlXMmAI8cQ2b3Qp3vfibE=",
+			"path": "github.com/headzoo/surf/agent",
+			"revision": "258b78a318a80b216e7d1033a8a4353341f7f4f8",
+			"revisionTime": "2017-03-20T10:43:56Z"
+		},
+		{
+			"checksumSHA1": "udI/rZqtIn5uyf/bPiXTT7FTXYQ=",
+			"path": "github.com/headzoo/surf/browser",
+			"revision": "258b78a318a80b216e7d1033a8a4353341f7f4f8",
+			"revisionTime": "2017-03-20T10:43:56Z"
+		},
+		{
+			"checksumSHA1": "hRnSyUe+i0ALGC+YBWyTYT04gR4=",
+			"path": "github.com/headzoo/surf/errors",
+			"revision": "258b78a318a80b216e7d1033a8a4353341f7f4f8",
+			"revisionTime": "2017-03-20T10:43:56Z"
+		},
+		{
+			"checksumSHA1": "/Zyogd98FVZsjqyVn7mRt5i4hOA=",
+			"path": "github.com/headzoo/surf/jar",
+			"revision": "258b78a318a80b216e7d1033a8a4353341f7f4f8",
+			"revisionTime": "2017-03-20T10:43:56Z"
+		},
+		{
+			"checksumSHA1": "uczU4npsD9cPr1/P1eNe7A+0Zxs=",
+			"path": "github.com/headzoo/surf/util",
+			"revision": "258b78a318a80b216e7d1033a8a4353341f7f4f8",
+			"revisionTime": "2017-03-20T10:43:56Z"
+		},
+		{
+			"checksumSHA1": "vqc3a+oTUGX8PmD0TS+qQ7gmN8I=",
+			"path": "golang.org/x/net/html",
+			"revision": "5602c733f70afc6dcec6766be0d5034d4c4f14de",
+			"revisionTime": "2017-04-13T17:15:43Z"
+		},
+		{
+			"checksumSHA1": "00eQaGynDYrv3tL+C7l9xH0IDZg=",
+			"path": "golang.org/x/net/html/atom",
+			"revision": "5602c733f70afc6dcec6766be0d5034d4c4f14de",
+			"revisionTime": "2017-04-13T17:15:43Z"
+		},
+		{
+			"checksumSHA1": "jg2T8dO/ox7qqjc1cT0Z2WLy50Y=",
+			"path": "gopkg.in/headzoo/surf.v1",
+			"revision": "3ab5b77981eb350c4821694b70cddc90d59e791c",
+			"revisionTime": "2017-03-18T14:29:47Z"
+		}
+	],
+	"rootPath": "github.com/atakanozceviz/scrapebooks"
+}
