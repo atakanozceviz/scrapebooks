@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-
 	"runtime"
 
 	"github.com/atakanozceviz/scrapebooks/controller"
@@ -30,9 +29,13 @@ func main() {
 func json(w http.ResponseWriter, r *http.Request) {
 	k := html.EscapeString(r.FormValue("keyword"))
 	if k != "" {
-		var books model.Books
+		books := model.Books{}
 		books = *controller.Search(&books, k)
 		avg := books.GetAvg()
+		if len(books) == 0 {
+			avg = 0.0
+			books = append(books, model.Book{"", "", "", "", "", 0.0, "", ""})
+		}
 		res := model.Result{
 			Books: books,
 			Avg:   avg,
@@ -48,17 +51,18 @@ func jsonp(w http.ResponseWriter, r *http.Request) {
 	k := html.EscapeString(r.FormValue("keyword"))
 	cb := r.FormValue("callback")
 	if k != "" && cb != "" {
-		var books model.Books
+		books := model.Books{}
 		books = *controller.Search(&books, k)
-		//avg, err := books.GetAvg()
-		//if err != nil {
-		//	log.Println(err)
-		//}
-		//res := model.Result{
-		//	Books: books,
-		//	Avg:   avg,
-		//}
-		jp := cb + "(" + string(books.ToJson()) + ")"
+		avg := books.GetAvg()
+		if len(books) == 0 {
+			avg = 0.0
+			books = append(books, model.Book{"", "", "", "", "", 0.0, "", ""})
+		}
+		res := model.Result{
+			Books: books,
+			Avg:   avg,
+		}
+		jp := cb + "(" + string(res.ToJson()) + ")"
 		w.Header().Set("Content-Type:", "application/json;charset=utf-8")
 		w.Write([]byte(jp))
 	} else {
