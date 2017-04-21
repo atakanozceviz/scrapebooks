@@ -41,7 +41,7 @@ func Pandora(books *model.Books, s string) {
 					WebSite:   "http://www.pandora.com.tr" + website,
 					Resource:  "Pandora",
 				}
-				model.Add(p, books)
+				model.Add(&p, books)
 			}
 		})
 	}

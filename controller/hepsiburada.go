@@ -46,9 +46,9 @@ type hData struct {
 }
 
 var re = regexp.MustCompile("{\".+}")
-var data = hData{}
 
 func Hepsiburada(books *model.Books, s string) {
+	var data = hData{}
 	defer wg.Done()
 	s = strings.Replace(s, " ", "+", -1)
 	resp, err := http.Get("http://www.hepsiburada.com/ara?q=" + s)
@@ -92,7 +92,7 @@ func Hepsiburada(books *model.Books, s string) {
 						//75 = "K" or 72 = "H" Means its a book
 						cat := data.ProductSkus[i][0]
 						if cat == 75 {
-							model.Add(b, books)
+							model.Add(&b, books)
 						}
 					}
 

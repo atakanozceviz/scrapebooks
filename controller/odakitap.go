@@ -36,7 +36,7 @@ func Odakitap(books *model.Books, s string) {
 				WebSite:   website,
 				Resource:  "Odakitap",
 			}
-			model.Add(p, books)
+			model.Add(&p, books)
 		}
 
 	}

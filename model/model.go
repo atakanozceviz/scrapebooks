@@ -29,7 +29,7 @@ type Result struct {
 var lock sync.Mutex
 var rep = strings.NewReplacer(",", ".", " ", "", "TL", "")
 
-func Add(b Book, bs *Books) {
+func Add(b *Book, bs *Books) {
 	pds := rep.Replace(b.Price)
 	pd, err := strconv.ParseFloat(pds, 64)
 	if err != nil {

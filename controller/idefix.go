@@ -36,7 +36,7 @@ func Idefix(books *model.Books, s string) {
 					WebSite:   "http://www.idefix.com" + website,
 					Resource:  "Idefix",
 				}
-				model.Add(p, books)
+				model.Add(&p, books)
 			}
 
 		})
