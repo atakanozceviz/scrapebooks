@@ -10,41 +10,42 @@ import (
 	"gopkg.in/headzoo/surf.v1"
 )
 
-func Odakitap(books *model.Books, s string) {
+func Sozcu(books *model.Books, s string) {
 	defer wg.Done()
 	s = strings.Replace(s, " ", "+", -1)
 	bow := surf.NewBrowser()
-	err := bow.Open("https://www.odakitap.com/index.php?p=Products&q=" + s)
+	err := bow.Open("https://www.sozcukitabevi.com/index.php?p=Products&q_field_active=0&q=" + s + "&ctg_id=&search.x=0&search.y=0&q_field=")
 	if err != nil {
 		log.Println(err)
 	} else if _, ok := strconv.ParseFloat(s, 64); ok != nil {
-		bow.Find(".liste-item").Each(func(i int, item *goquery.Selection) {
-			title := item.Find(".l-name a").Text()
-			author := item.Find(".l-owner a").Text()
-			pub := item.Find(".l-company a").Text()
-			img, _ := item.Find(".liste-photo").Attr("src")
-			price := item.Find(".l-price").Text()
-			website, _ := item.Find(".liste-photo-wrapper a").Attr("href")
+		bow.Find(".items_col").Each(func(i int, item *goquery.Selection) {
+			tw := item.Find(".name a")
+			title := tw.Text()
+			author := item.Find(".writer a").Text()
+			pub := item.Find(".publisher a").Text()
+			img, _ := item.Find(".prd_img").Attr("src")
+			price := item.Find(".final_price").Text()
+			website, _ := tw.Attr("href")
 
 			if title != "" && price != "" {
 				p := model.Book{
 					Title:     title,
 					Author:    author,
 					Publisher: pub,
-					Img:       "https://www.odakitap.com" + img,
+					Img:       "https://www.sozcukitabevi.com" + img,
 					Price:     price,
 					WebSite:   website,
-					Resource:  "Odakitap",
+					Resource:  "Sözcü Kitabevi",
 				}
 				model.Add(&p, books)
 			}
+
 		})
 	} else {
-		item := bow.Find(".main-content")
-
-		title := item.Find(".pd-name").Text()
-		author := item.Find(".pd-owner a").Text()
-		pub := item.Find(".pd-publisher a span").Text()
+		item := bow.Find(".main_content")
+		title := item.Find(".contentHeader").Text()
+		author := item.Find(".prd_view_writer span").Text()
+		pub := item.Find(".prd_view_publisher span").Text()
 		img, _ := item.Find("#main_img").Attr("src")
 		price := item.Find("#prd_final_price_display").Text()
 		website := bow.Url().String()
@@ -54,10 +55,10 @@ func Odakitap(books *model.Books, s string) {
 				Title:     title,
 				Author:    author,
 				Publisher: pub,
-				Img:       "https://www.odakitap.com" + img,
+				Img:       "https://www.sozcukitabevi.com" + img,
 				Price:     price,
 				WebSite:   website,
-				Resource:  "Odakitap",
+				Resource:  "Sözcü Kitabevi",
 			}
 			model.Add(&p, books)
 		}
