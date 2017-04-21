@@ -50,7 +50,7 @@ func Add(b Book, bs *Books) {
 }
 
 func (bs *Books) ToJson() []byte {
-	j, err := json.Marshal(bs)
+	j, err := json.Marshal(*bs)
 	if err != nil {
 		log.Println(err)
 	}
@@ -58,17 +58,17 @@ func (bs *Books) ToJson() []byte {
 }
 
 func (res *Result) ToJson() []byte {
-	j, err := json.Marshal(res)
+	j, err := json.Marshal(*res)
 	if err != nil {
 		log.Println(err)
 	}
 	return j
 }
 
-func (bs Books) GetAvg() float64 {
+func (bs *Books) GetAvg() float64 {
 	avg := 0.0
 	i := 0.0
-	for _, v := range bs {
+	for _, v := range *bs {
 		avg += v.PriceFloat
 		i++
 	}
