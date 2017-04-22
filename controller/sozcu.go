@@ -14,11 +14,12 @@ func Sozcu(books *model.Books, s string) {
 	defer wg.Done()
 	s = strings.Replace(s, " ", "+", -1)
 	bow := surf.NewBrowser()
-	err := bow.Open("https://www.sozcukitabevi.com/index.php?p=Products&q_field_active=0&q=" + s + "&ctg_id=&search.x=0&search.y=0&q_field=")
+	err := bow.Open("https://www.sozcukitabevi.com/index.php?p=Products&q_field_active=0&q=" + s + "&ctg_id=&search_x=0&search_y=0&q_field=&sort_type=prs_monthly-desc&stock=1")
 	if err != nil {
 		log.Println(err)
 	} else if _, ok := strconv.ParseFloat(s, 64); ok != nil {
-		bow.Find(".items_col").Each(func(i int, item *goquery.Selection) {
+		main := bow.Find("main")
+		main.Find(".items_col").Each(func(i int, item *goquery.Selection) {
 			tw := item.Find(".name a")
 			title := tw.Text()
 			author := item.Find(".writer a").Text()
