@@ -61,17 +61,6 @@ func Hepsiburada(books *model.Books, s string) {
 			log.Println(err)
 		} else {
 			json.Unmarshal(re.Find(body), &data)
-			//for i, v := range data.ProductNames {
-			//	b := model.Book{
-			//		Title:     v,
-			//		Author:    "",
-			//		Price:     data.ProductPrices[i],
-			//		Publisher: data.ProductBrands[i],
-			//		WebSite:   "",
-			//		Img:       "",
-			//	}
-			//	model.Add(b, books)
-			//}
 			bow, err := goquery.NewDocument("http://www.hepsiburada.com/ara?q=" + s)
 			if err != nil {
 				log.Println(err)
@@ -79,7 +68,7 @@ func Hepsiburada(books *model.Books, s string) {
 				bow.Find(".product").Each(func(i int, item *goquery.Selection) {
 					img, _ := item.Find("img").Attr("src")
 					link, _ := item.Find("a").First().Attr("href")
-					if img != "" && link != "" {
+					if img != "" && link != "" && i < len(data.ProductNames) {
 						b := model.Book{
 							Title:     data.ProductNames[i],
 							Author:    "",
@@ -89,11 +78,12 @@ func Hepsiburada(books *model.Books, s string) {
 							Img:       img,
 							Resource:  "Hepsiburada",
 						}
-						//75 = "K" or 72 = "H" Means its a book
+						//75 = "K" Means its a book category
 						cat := data.ProductSkus[i][0]
 						if cat == 75 {
 							model.Add(&b, books)
 						}
+
 					}
 
 				})

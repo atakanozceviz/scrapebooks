@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 	"runtime"
 
 	"github.com/atakanozceviz/scrapebooks/controller"
@@ -29,9 +30,13 @@ func main() {
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
+var re = regexp.MustCompile(`(^ +)|( +$)`)
+
 func json(w http.ResponseWriter, r *http.Request) {
 	k := html.EscapeString(r.FormValue("keyword"))
-	if k != "" {
+
+	k = re.ReplaceAllString(k, "")
+	if len(k) >= 3 {
 		books := model.Books{}
 		books = *controller.Search(&books, k)
 		avg := books.GetAvg()
