@@ -8,6 +8,9 @@ import (
 	"regexp"
 	"runtime"
 
+	"strconv"
+	"time"
+
 	"github.com/atakanozceviz/scrapebooks/controller"
 	"github.com/atakanozceviz/scrapebooks/model"
 )
@@ -27,6 +30,11 @@ func main() {
 		http.ServeFile(w, r, "./view/favicon.ico")
 	})
 	log.Println("Serving on port: " + port)
+
+	http.HandleFunc("/sync", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte(strconv.FormatInt(time.Now().UTC().Unix(), 10)))
+	})
+
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
