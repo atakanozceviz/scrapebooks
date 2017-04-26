@@ -48,7 +48,7 @@ func json(w http.ResponseWriter, r *http.Request) {
 			Books: books,
 			Avg:   avg,
 		}
-		w.Header().Set("Content-Type:", "application/json;charset=utf-8")
+		w.Header().Set("Content-Type", "application/json;charset=utf-8")
 		w.Write(res.ToJson())
 	} else {
 		w.Write([]byte("Wrong request!"))
@@ -71,7 +71,7 @@ func jsonp(w http.ResponseWriter, r *http.Request) {
 			Avg:   avg,
 		}
 		jp := cb + "(" + string(res.ToJson()) + ")"
-		w.Header().Set("Content-Type:", "application/json;charset=utf-8")
+		w.Header().Set("Content-Type", "application/json;charset=utf-8")
 		w.Write([]byte(jp))
 	} else {
 		jp := cb + `({"err": "FormEmpty"})`
