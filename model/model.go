@@ -29,6 +29,7 @@ type Result struct {
 var lock sync.Mutex
 var rep = strings.NewReplacer(",", ".", " ", "", "TL", "")
 
+//Adds a book to books
 func Add(b *Book, bs *Books) {
 	pds := rep.Replace(b.Price)
 	pd, err := strconv.ParseFloat(pds, 64)
@@ -49,14 +50,7 @@ func Add(b *Book, bs *Books) {
 	lock.Unlock()
 }
 
-func (bs *Books) ToJson() []byte {
-	j, err := json.Marshal(*bs)
-	if err != nil {
-		log.Println(err)
-	}
-	return j
-}
-
+//Returns JSON value of Result
 func (res *Result) ToJson() []byte {
 	j, err := json.Marshal(*res)
 	if err != nil {
@@ -65,6 +59,7 @@ func (res *Result) ToJson() []byte {
 	return j
 }
 
+//Returns average price of books
 func (bs *Books) GetAvg() float64 {
 	avg := 0.0
 	i := 0.0
