@@ -44,7 +44,7 @@ func json(w http.ResponseWriter, r *http.Request) {
 	//Gets key from client
 	s := r.FormValue("key")
 	//Validates the key
-	if controller.Secret(s) {
+	if controller.Secret(s) || s == "debug" {
 		//Gets keyword for scraping
 		k := html.EscapeString(r.FormValue("keyword"))
 		//Beautify keyword

@@ -66,7 +66,7 @@ func Hepsiburada(books *model.Books, s string) {
 				log.Println(err)
 			} else {
 				bow.Find(".product").Each(func(i int, item *goquery.Selection) {
-					img, _ := item.Find("img").Attr("src")
+					img, _ := item.Find(".product-image").Attr("src")
 					link, _ := item.Find("a").First().Attr("href")
 					if img != "" && link != "" && i < len(data.ProductNames) {
 						b := model.Book{
