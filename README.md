@@ -1,2 +1,2 @@
-# finbooks
+# scrapebooks
 scrape books from web
