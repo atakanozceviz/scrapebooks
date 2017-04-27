@@ -31,10 +31,13 @@ var rep = strings.NewReplacer(",", ".", " ", "", "TL", "")
 
 //Adds a book to books
 func Add(b *Book, bs *Books) {
-	pds := rep.Replace(b.Price)
-	pd, err := strconv.ParseFloat(pds, 64)
-	if err != nil {
-		log.Println(err)
+	if b.Price != "" {
+		pds := rep.Replace(b.Price)
+		var err error
+		b.PriceFloat, err = strconv.ParseFloat(pds, 64)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 	lock.Lock()
 	*bs = append(*bs, Book{
@@ -43,7 +46,7 @@ func Add(b *Book, bs *Books) {
 		Publisher:  b.Publisher,
 		Img:        b.Img,
 		Price:      b.Price,
-		PriceFloat: pd,
+		PriceFloat: b.PriceFloat,
 		WebSite:    b.WebSite,
 		Resource:   b.Resource,
 	})

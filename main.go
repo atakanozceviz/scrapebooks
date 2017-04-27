@@ -4,7 +4,6 @@ import (
 	"html"
 	"log"
 	"net/http"
-	"os"
 	"regexp"
 	"runtime"
 
@@ -22,7 +21,7 @@ func init() {
 
 func main() {
 	//Gets PORT value
-	port := os.Getenv("PORT")
+	port := "9090" //os.Getenv("PORT")
 	http.HandleFunc("/", json)
 	//Serves noimg image
 	http.HandleFunc("/noimage", func(w http.ResponseWriter, r *http.Request) {

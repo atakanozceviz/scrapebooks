@@ -100,6 +100,7 @@ type jData struct {
 }
 
 func Idefix(books *model.Books, s string) {
+	defer wg.Done()
 	uri := `http://www.idefix.com/ApiCatalog/Search/`
 
 	jsonStr := []byte(`{"content":{"maxPrice":-1.0,"minPrice":-1.0,"page":1,"size":999,"sortfield":"relevance","sortorder":"desc","term":"` + s + `"},"reponseType":0}`)
@@ -120,11 +121,9 @@ func Idefix(books *model.Books, s string) {
 
 	var str jData
 	LogErr(json.Unmarshal(jsonData, &str))
-
 	for _, v := range str.SearchResponse.Products {
 		for _, c := range v.Categories.Category {
 			if c.ID == 11693 {
-
 				title := v.Name
 				var author string
 				for _, p := range v.Persons.Person {
@@ -135,14 +134,15 @@ func Idefix(books *model.Books, s string) {
 
 				pub := v.ManufacturerName
 				img := "http://i.dr.com.tr" + v.ImageURL
-				price := v.Price
+				priceFloat := v.Price
 				website := "http://www.idefix.com" + v.URL
 				p := model.Book{
 					Title:      title,
 					Author:     author,
 					Publisher:  pub,
 					Img:        img,
-					PriceFloat: price,
+					Price:      "",
+					PriceFloat: priceFloat,
 					WebSite:    website,
 					Resource:   "Idefix",
 				}
@@ -160,6 +160,7 @@ func LogErr(err error) {
 	}
 }
 
+//
 //func Idefix(books *model.Books, s string) {
 //	defer wg.Done()
 //	s = strings.Replace(s, " ", "%20", -1)
