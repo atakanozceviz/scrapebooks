@@ -33,13 +33,14 @@ func Pandora(books *model.Books, s string) {
 			website, _ := item.Find(".imgcont a").Attr("href")
 			if title != "" && price != "" {
 				p := model.Book{
-					Title:     title,
-					Author:    author,
-					Publisher: pub,
-					Img:       "http://www.pandora.com.tr" + img,
-					Price:     price,
-					WebSite:   "http://www.pandora.com.tr" + website,
-					Resource:  "Pandora",
+					Title:      title,
+					Author:     author,
+					Publisher:  pub,
+					Img:        "http://www.pandora.com.tr" + img,
+					Price:      price,
+					PriceFloat: 0.0,
+					WebSite:    "http://www.pandora.com.tr" + website,
+					Resource:   "Pandora",
 				}
 				model.Add(&p, books)
 			}

@@ -30,13 +30,14 @@ func Sozcu(books *model.Books, s string) {
 
 			if title != "" && price != "" {
 				p := model.Book{
-					Title:     title,
-					Author:    author,
-					Publisher: pub,
-					Img:       "https://www.sozcukitabevi.com" + img,
-					Price:     price,
-					WebSite:   website,
-					Resource:  "Sözcü Kitabevi",
+					Title:      title,
+					Author:     author,
+					Publisher:  pub,
+					Img:        "https://www.sozcukitabevi.com" + img,
+					Price:      price,
+					PriceFloat: 0.0,
+					WebSite:    website,
+					Resource:   "Sözcü Kitabevi",
 				}
 				model.Add(&p, books)
 			}

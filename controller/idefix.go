@@ -7,6 +7,8 @@ import (
 	"log"
 	"net/http"
 
+	"strconv"
+
 	"github.com/atakanozceviz/scrapebooks/model"
 )
 
@@ -141,7 +143,7 @@ func Idefix(books *model.Books, s string) {
 					Author:     author,
 					Publisher:  pub,
 					Img:        img,
-					Price:      "",
+					Price:      strconv.FormatFloat(priceFloat, 'f', 6, 64),
 					PriceFloat: priceFloat,
 					WebSite:    website,
 					Resource:   "Idefix",

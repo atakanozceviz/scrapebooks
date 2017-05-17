@@ -31,7 +31,7 @@ var rep = strings.NewReplacer(",", ".", " ", "", "TL", "")
 
 //Adds a book to books
 func Add(b *Book, bs *Books) {
-	if b.Price != "" {
+	if b.Price != "" && b.PriceFloat == 0.0 {
 		pds := rep.Replace(b.Price)
 		var err error
 		b.PriceFloat, err = strconv.ParseFloat(pds, 64)

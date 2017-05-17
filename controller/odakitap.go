@@ -28,13 +28,14 @@ func Odakitap(books *model.Books, s string) {
 
 			if title != "" && price != "" {
 				p := model.Book{
-					Title:     title,
-					Author:    author,
-					Publisher: pub,
-					Img:       "https://www.odakitap.com" + img,
-					Price:     price,
-					WebSite:   website,
-					Resource:  "Odakitap",
+					Title:      title,
+					Author:     author,
+					Publisher:  pub,
+					Img:        "https://www.odakitap.com" + img,
+					Price:      price,
+					PriceFloat: 0.0,
+					WebSite:    website,
+					Resource:   "Odakitap",
 				}
 				model.Add(&p, books)
 			}

@@ -70,13 +70,14 @@ func Hepsiburada(books *model.Books, s string) {
 					link, _ := item.Find("a").First().Attr("href")
 					if img != "" && link != "" && i < len(data.ProductNames) {
 						b := model.Book{
-							Title:     data.ProductNames[i],
-							Author:    "",
-							Price:     data.ProductPrices[i],
-							Publisher: data.ProductBrands[i],
-							WebSite:   "http://www.hepsiburada.com" + link,
-							Img:       img,
-							Resource:  "Hepsiburada",
+							Title:      data.ProductNames[i],
+							Author:     "",
+							Price:      data.ProductPrices[i],
+							PriceFloat: 0.0,
+							Publisher:  data.ProductBrands[i],
+							WebSite:    "http://www.hepsiburada.com" + link,
+							Img:        img,
+							Resource:   "Hepsiburada",
 						}
 						//75 = "K" Means its a book category
 						cat := data.ProductSkus[i][0]
