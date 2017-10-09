@@ -3,6 +3,7 @@ package model
 import (
 	"encoding/json"
 	"log"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -20,6 +21,10 @@ type Book struct {
 }
 
 type Books []Book
+
+func (bs Books) Len() int           { return len(bs) }
+func (bs Books) Less(i, j int) bool { return bs[i].PriceFloat < bs[j].PriceFloat }
+func (bs Books) Swap(i, j int)      { bs[i], bs[j] = bs[j], bs[i] }
 
 type Result struct {
 	Books Books   `json:"books"`
@@ -55,6 +60,7 @@ func Add(b *Book, bs *Books) {
 
 //Returns JSON value of Result
 func (res *Result) ToJson() []byte {
+	sort.Sort(res.Books)
 	j, err := json.Marshal(*res)
 	if err != nil {
 		log.Println(err)

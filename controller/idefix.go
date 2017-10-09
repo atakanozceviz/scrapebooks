@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-
 	"strconv"
 
 	"github.com/atakanozceviz/scrapebooks/model"
